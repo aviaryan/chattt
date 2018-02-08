@@ -4,6 +4,7 @@
   "description": "Chattt",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/aviaryan/chattt/issues"
   },
-  "homepage": "https://github.com/aviaryan/chattt#readme"
+  "homepage": "https://github.com/aviaryan/chattt#readme",
+  "dependencies": {
+    "socket.io-client": "^2.0.4"
+  }
 }
