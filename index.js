@@ -1,6 +1,9 @@
-let io = require('socket.io-client');
+const io = require('socket.io-client');
 
-let socket = io('https://chattt.glitch.me');
+const URL = 'https://chattt.glitch.me';
+// const URL = 'http://localhost:3000'; 
+
+const socket = io(URL);
 
 socket.on('connect', () => {
 	console.log('connected');
