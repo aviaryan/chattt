@@ -11,28 +11,52 @@ const URL = 'http://localhost:3000';
 
 const socket = io(URL);
 
-socket.on('connect', () => {
-	console.log('connected');
-	socket.emit('/join', {channel: 'test', user: 'avi'});
+let channel, user;
 
-	socket.on('/msg test', function (msg) {
-		if (msg.user === null){
-			console.log(`[ ${msg.data} ]`);
-		} else {
-			console.log(`${msg.user}: ${msg.data}`);
+function getChannel(cb){
+	rl.question(`Enter channel > `, (inp) => {
+		channel = inp;
+		if (cb){
+			cb();
 		}
 	});
+}
+
+function getUser(cb) {
+	rl.question(`Enter user > `, (inp) => {
+		user = inp;
+		if (cb) {
+			cb();
+		}
+	});
+}
+
+socket.on('connect', () => {
+	console.log('connected');
+	let getUserAndJoin = () => {
+		getUser(() => {
+			socket.emit('/join', { channel: channel, user: user });
+		});
+	};
+	getChannel(getUserAndJoin);
 
 	socket.on('/status', (msg) => {
 		if (msg.type === 'join failed'){
 			console.log(`[ ${msg.data} ]`);
+			getUserAndJoin();
 		} else if (msg.type === 'joined') {
+			// listener for messages
+			socket.on('/msg test', function (msg) {
+				if (msg.user === null) {
+					console.log(`[ ${msg.data} ]`);
+				} else {
+					console.log(`${msg.user}: ${msg.data}`);
+				}
+			});
 			// get user input messages
 			let getInput = () => {
 				rl.question('', (inp) => {
-					// console.log('Got input ' + inp);
-					socket.emit('/msg test', { user: 'avi', data: inp });
-					// rl.close();
+					socket.emit('/msg test', { user: user, data: inp });
 					getInput();
 				});
 			};
