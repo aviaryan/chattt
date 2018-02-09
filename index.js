@@ -7,7 +7,7 @@ const rl = readline.createInterface({
 });
 
 // const URL = 'https://chattt.glitch.me';
-const URL = 'http://localhost:3000'; 
+const URL = 'http://localhost:3000';
 
 const socket = io(URL);
 
@@ -17,16 +17,20 @@ socket.on('connect', () => {
 
 	socket.on('/msg test', function (msg) {
 		if (msg.user === null){
-			console.log(`[ ${msg.message} ]`);
+			console.log(`[ ${msg.data} ]`);
 		} else {
-			console.log(`${msg.user}: ${msg.message}`);
+			console.log(`${msg.user}: ${msg.data}`);
 		}
+	});
+
+	socket.on('/status', (msg) => {
+		console.log(msg);
 	});
 
 	let getInput = () => {
 		rl.question('', (inp) => {
 			// console.log('Got input ' + inp);
-			socket.emit('/msg test', { user: 'avi', message: inp });
+			socket.emit('/msg test', { user: 'avi', data: inp });
 			// rl.close();
 			getInput();
 		});
