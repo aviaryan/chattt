@@ -46,7 +46,7 @@ socket.on('connect', () => {
 			getUserAndJoin();
 		} else if (msg.type === 'joined') {
 			// listener for messages
-			socket.on('/msg test', function (msg) {
+			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
 					console.log(`[ ${msg.data} ]`);
 				} else {
@@ -56,7 +56,9 @@ socket.on('connect', () => {
 			// get user input messages
 			let getInput = () => {
 				rl.question('', (inp) => {
-					socket.emit('/msg test', { user: user, data: inp });
+					socket.emit('/msg ' + channel, { user: user, data: inp });
+					// https://stackoverflow.com/questions/45147470/
+					readline.moveCursor(process.stdout, 0, -1);
 					getInput();
 				});
 			};
