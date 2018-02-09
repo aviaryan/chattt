@@ -24,17 +24,19 @@ socket.on('connect', () => {
 	});
 
 	socket.on('/status', (msg) => {
-		console.log(msg);
-	});
-
-	let getInput = () => {
-		rl.question('', (inp) => {
-			// console.log('Got input ' + inp);
-			socket.emit('/msg test', { user: 'avi', data: inp });
-			// rl.close();
+		if (msg.type === 'join failed'){
+			console.log(`[ ${msg.data} ]`);
+		} else if (msg.type === 'joined') {
+			// get user input messages
+			let getInput = () => {
+				rl.question('', (inp) => {
+					// console.log('Got input ' + inp);
+					socket.emit('/msg test', { user: 'avi', data: inp });
+					// rl.close();
+					getInput();
+				});
+			};
 			getInput();
-		});
-	};
-	getInput();
-
+		}
+	});
 });
