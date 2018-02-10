@@ -20,9 +20,17 @@ screen.append(input.input);
 box.screen = screen;
 input.screen = screen;
 
+let loading = blessed.loading({
+	tags: true
+});
+loading.load('{center}Chattt is connecting to the server{/center}');
+screen.append(loading);
+
 // when socket connects
 socket.on('connect', () => {
 	box.addAnn('Connected to the server ' + URL);
+	// stop loading
+	loading.stop();
 
 	// join a channel
 	let userJoin = () => {
