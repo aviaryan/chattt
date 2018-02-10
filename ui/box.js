@@ -62,6 +62,10 @@ let self = {
 	},
 	addErr: (text) => {
 		self.add(`{${colors.red}-fg}${text}{/${colors.red}-fg}`);
+	},
+	addChatMsg: (msg) => {
+		let clr = colors.getUserColor(msg.user);
+		self.add(`{${clr}-fg}${msg.user}:{/${clr}-fg} ${msg.data}`);
 	}
 };
 

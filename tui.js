@@ -72,16 +72,16 @@ socket.on('connect', () => {
 		if (msg.type === 'join failed') {
 			box.addErr(msg.data);
 			userJoin();
-			// TODO: err messages
 		} else if (msg.type === 'joined') {
 			// set status message
 			box.addAnn(`Joined channel ${channel} as ${user}`);
 			// listener for messages
 			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
-					box.add(`[ ${msg.data} ]`);
+					// public message TODO:
+					box.addAnn(msg.data);
 				} else {
-					box.add(`${msg.user}: ${msg.data}`);
+					box.addChatMsg(msg);
 				}
 			});
 			// get user input messages
