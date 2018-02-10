@@ -1,4 +1,5 @@
 const io = require('socket.io-client');
+const colors = require('./lib/solarized');
 const blessed = require('blessed');
 
 let program = blessed.program();
@@ -28,7 +29,8 @@ screen.append(loading);
 
 // when socket connects
 socket.on('connect', () => {
-	box.addAnn('Connected to the server ' + URL);
+	box.box.content = `{center}{${colors.blue}-fg}Connected to the server ${URL}{/${colors.blue}-fg}{/center}`;
+	screen.render();
 	// stop loading
 	loading.stop();
 
