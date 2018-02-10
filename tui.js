@@ -70,7 +70,7 @@ socket.on('connect', () => {
 	// set other listener
 	socket.on('/status', (msg) => {
 		if (msg.type === 'join failed') {
-			box.addAnn(msg.data);
+			box.addErr(msg.data);
 			userJoin();
 			// TODO: err messages
 		} else if (msg.type === 'joined') {

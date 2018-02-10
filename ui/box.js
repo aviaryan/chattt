@@ -59,6 +59,9 @@ let self = {
 	},
 	addAnn: (text) => {
 		self.add('{center}*** ' + text + ' ***{/center}');
+	},
+	addErr: (text) => {
+		self.add(`{${colors.red}-fg}${text}{/${colors.red}-fg}`);
 	}
 };
 
