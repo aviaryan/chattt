@@ -1,14 +1,7 @@
 const blessed = require('blessed');
-const colors = require('./lib/solarized.js');
+// const colors = require('./lib/solarized.js');
 
-// Create a screen object.
-var screen = blessed.screen({
-	smartCSR: true,
-	useBCE: true
-});
-
-screen.title = 'Chattt';
-
+let screen = require('./ui/screen');
 let box = require('./ui/box.js');
 
 // Append our box to the screen.
@@ -41,11 +34,6 @@ screen.append(textBox);
 // 	box.insertLine(1, 'foo');
 // 	screen.render();
 // });
-
-// Quit on Escape, q, or Control-C.
-screen.key(['escape', 'q', 'C-c'], function (ch, key) {
-	return process.exit(0);
-});
 
 // Focus our element.
 // box.focus();
