@@ -12,7 +12,7 @@ let input = blessed.textbox({
 	}
 });
 
-module.exports = {
+let self = {
 	input: input,
 	focus: () => {
 		input.focus();
@@ -23,8 +23,15 @@ module.exports = {
 			if (err) {
 				console.log(err);
 			}
-			input.clearValue();
-			cb(value);
+			if (!value){
+				// read again, nothing was entered
+				self.read(cb);
+			} else {
+				input.clearValue();
+				cb(value);
+			}
 		});
 	}
 };
+
+module.exports = self;
