@@ -45,6 +45,9 @@ socket.on('connect', () => {
 			box.addErr(msg.data);
 			userJoin();
 		} else if (msg.type === 'joined') {
+			// update screen title
+			screen.title = `${user} on #${channel} - Chattt`;
+			screen.render();
 			// delete old lines
 			box.deleteAllLines();
 			// set status message
