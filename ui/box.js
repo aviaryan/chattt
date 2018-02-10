@@ -10,7 +10,7 @@ let box = blessed.box({
 	padding: 0,
 	scrollable: true,
 	scrollbar: true,
-	content: '**** Welcome to {bold}chattt{/bold}! ****',
+	content: '{center}****Welcome to {bold}chattt{/bold}!****{/center}',
 	tags: true,
 	border: {
 		type: 'line'
@@ -31,8 +31,9 @@ let box = blessed.box({
 	}
 });
 
-module.exports = {
+let self = {
 	box: box,
+	screen: null,
 	batchAdd: (text) => {
 		box.setLine(++lineCount, text);
 	},
@@ -43,8 +44,19 @@ module.exports = {
 		}
 		// scroll to the bottom
 		box.setScrollPerc(100);
+		// render update
+		self.screen.render();
 	},
 	focus: () => {
 		box.focus();
+	},
+	add: (text) => {
+		self.batchAdd(text);
+		self.finishAdding();
+	},
+	addPrompt: (text) => {
+		self.add('>> ' + text);
 	}
-}
+};
+
+module.exports = self;

@@ -18,6 +18,7 @@ module.exports = {
 		input.focus();
 	},
 	read: (cb) => {
+		input.focus();
 		input.readInput((err, value) => {
 			if (err) {
 				console.log(err);
