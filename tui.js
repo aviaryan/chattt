@@ -1,6 +1,5 @@
+const blessed = require('blessed');
 const colors = require('./lib/solarized.js');
-var blessed = require('blessed');
-
 
 // Create a screen object.
 var screen = blessed.screen({
@@ -10,40 +9,10 @@ var screen = blessed.screen({
 
 screen.title = 'Chattt';
 
-// Create a box perfectly centered horizontally and vertically.
-var box = blessed.box({
-	top: 0,
-	left: 0,
-	width: '100%',
-	padding: 0,
-	scrollable: true,
-	scrollbar: true,
-	// width: '95%',
-	// width: '100%',
-	// height: '90%',
-	content: '**** Welcome to {bold}chattt{/bold}! ****',
-	tags: true,
-	border: {
-		type: 'line'
-	},
-	style: {
-		fg: colors.base1,
-		bg: colors.base03,
-		border: {
-			fg: '#f0f0f0'
-		},
-		hover: {
-			// bg: 'green'
-		},
-		"scrollbar": {
-			"bg": "grey",
-			"fg": "bg"
-		}
-	}
-});
+let box = require('./ui/box.js');
 
 // Append our box to the screen.
-screen.append(box);
+screen.append(box.box);
 
 var textBox = blessed.textbox({
 	bottom: 0,
@@ -58,18 +27,6 @@ var textBox = blessed.textbox({
 });
 
 screen.append(textBox);
-
-// Add a png icon to the box
-var icon = blessed.image({
-	parent: box,
-	top: 0,
-	left: 0,
-	type: 'overlay',
-	width: 'shrink',
-	height: 'shrink',
-	file: __dirname + '/my-program-icon.png',
-	search: false
-});
 
 // If our box is clicked, change the content.
 // box.on('click', function (data) {
@@ -96,11 +53,13 @@ textBox.focus();
 textBox.readInput((err, value) => {
 	// console.log(value);
 	for (let i=0; i<100; i++){
-		box.setLine(i+1, ' Joining channel ' + value + " " + i);
+		box.addMessage(' Joining channel ' + value + " " + i);
+		// box.setLine(i+1, ' Joining channel ' + value + " " + i);
 	}
-	box.setScrollPerc(100);
-	box.focus();
+	// box.setScrollPerc(100);
+	// box.focus();
 	// box.setContent(' Joining channel ' + value);
+	box.box.focus();
 	screen.render();
 });
 
