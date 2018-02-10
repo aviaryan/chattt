@@ -1,68 +1,99 @@
 const io = require('socket.io-client');
-const readline = require('readline');
+const colors = require('./lib/solarized');
+const blessed = require('blessed');
 
-const rl = readline.createInterface({
-	input: process.stdin,
-	output: process.stdout
-});
+let program = blessed.program();
+let screen = require('./ui/screen');
+let box = require('./ui/box.js');
+let input = require('./ui/input');
 
+/** Server URL **/
 // const URL = 'https://chattt.glitch.me';
 const URL = 'http://localhost:3000';
 
+// server connection
 const socket = io(URL);
-
 let channel, user;
 
-function getChannel(cb){
-	rl.question(`Enter channel > `, (inp) => {
-		channel = inp;
-		if (cb){
-			cb();
-		}
-	});
-}
+// Append elements to the screen.
+screen.append(box.box);
+screen.append(input.input);
+box.screen = screen;
+input.screen = screen;
 
-function getUser(cb) {
-	rl.question(`Enter user > `, (inp) => {
-		user = inp;
-		if (cb) {
-			cb();
-		}
-	});
-}
+let loading = blessed.loading({
+	tags: true
+});
+loading.load('{center}Chattt is connecting to the server{/center}');
+screen.append(loading);
 
+// when socket connects
 socket.on('connect', () => {
-	console.log('connected');
-	let getUserAndJoin = () => {
-		getUser(() => {
+	box.box.content = `{center}{${colors.blue}-fg}Connected to the server ${URL}{/${colors.blue}-fg}{/center}`;
+	screen.render();
+	// stop loading
+	loading.stop();
+
+	// join a channel
+	let userJoin = () => {
+		box.addPrompt('Enter user handle');
+		input.read((val) => {
+			user = val;
+			// join
 			socket.emit('/join', { channel: channel, user: user });
 		});
 	};
-	getChannel(getUserAndJoin);
+	box.addPrompt('Enter channel to join');
+	input.read((ch) => {
+		channel = ch;
+		userJoin();
+	});
 
+	// set other listener
 	socket.on('/status', (msg) => {
-		if (msg.type === 'join failed'){
-			console.log(`[ ${msg.data} ]`);
-			getUserAndJoin();
+		if (msg.type === 'join failed') {
+			box.addErr(msg.data);
+			userJoin();
 		} else if (msg.type === 'joined') {
+			// update screen title
+			screen.title = `${user} on #${channel} - Chattt`;
+			screen.render();
+			// delete old lines
+			box.deleteAllLines();
+			// set status message
+			box.addAnn(`Joined channel ${channel} as ${user}`);
 			// listener for messages
 			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
-					console.log(`[ ${msg.data} ]`);
+					// public message TODO:
+					box.addChatAnn(msg.data);
 				} else {
-					console.log(`${msg.user}: ${msg.data}`);
+					box.addChatMsg(msg);
 				}
 			});
 			// get user input messages
 			let getInput = () => {
-				rl.question('', (inp) => {
-					socket.emit('/msg ' + channel, { user: user, data: inp });
-					// https://stackoverflow.com/questions/45147470/
-					readline.moveCursor(process.stdout, 0, -1);
+				input.read((val) => {
+					socket.emit('/msg ' + channel, { user: user, data: val });
 					getInput();
 				});
 			};
 			getInput();
 		}
 	});
+});
+
+// initial render
+screen.render();
+
+// force exit feature
+program.key('C-c', function (ch, key) {
+	program.clear();
+	process.exit(0);
+});
+
+// clear value when escape pressed
+// meant as a way to cancel message operation
+program.key('escape', (ch, key) => {
+	input.clear();
 });
