@@ -1,7 +1,7 @@
 const io = require('socket.io-client');
-// const blessed = require('blessed');
-// const colors = require('./lib/solarized.js');
+const blessed = require('blessed');
 
+let program = blessed.program();
 let screen = require('./ui/screen');
 let box = require('./ui/box.js');
 let input = require('./ui/input');
@@ -50,7 +50,7 @@ box.screen = screen;
 
 // when socket connects
 socket.on('connect', () => {
-	box.add('{center}*** Connected to the server ***{/center}');
+	box.addAnn('Connected to the server');
 
 	// Render the screen.
 	box.addPrompt('Enter channel to join');
@@ -68,12 +68,14 @@ socket.on('connect', () => {
 	socket.on('/status', (msg) => {
 		if (msg.type === 'join failed') {
 			// console.log(`[ ${msg.data} ]`);
+			// TODO: retry
 			// getUserAndJoin();
 			box.add('failed');
+			// TODO: err messages
 
 		} else if (msg.type === 'joined') {
 			// set status message
-			box.add(`*** Joined channel ${channel} as ${user} ***`);
+			box.addAnn(`Joined channel ${channel} as ${user}`);
 			// listener for messages
 			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
@@ -96,3 +98,9 @@ socket.on('connect', () => {
 
 // initial render
 screen.render();
+
+// force exit feature
+program.key('C-c', function (ch, key) {
+	program.clear();
+	process.exit(0);
+});

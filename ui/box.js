@@ -56,6 +56,9 @@ let self = {
 	},
 	addPrompt: (text) => {
 		self.add('>> ' + text);
+	},
+	addAnn: (text) => {
+		self.add('{center}*** ' + text + ' ***{/center}');
 	}
 };
 
