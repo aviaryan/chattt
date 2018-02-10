@@ -23,6 +23,7 @@ module.exports = {
 			if (err) {
 				console.log(err);
 			}
+			input.clearValue();
 			cb(value);
 		});
 	}
