@@ -69,6 +69,12 @@ let self = {
 	addChatMsg: (msg) => {
 		let clr = colors.getUserColor(msg.user);
 		self.add(`{${clr}-fg}${msg.user}:{/${clr}-fg} ${msg.data}`);
+	},
+	deleteAllLines: () => {
+		for (let i = lineCount; i >= 1; i--){
+			box.deleteLine(i);
+		}
+		lineCount = 0;
 	}
 };
 

@@ -44,6 +44,8 @@ socket.on('connect', () => {
 			box.addErr(msg.data);
 			userJoin();
 		} else if (msg.type === 'joined') {
+			// delete old lines
+			box.deleteAllLines();
 			// set status message
 			box.addAnn(`Joined channel ${channel} as ${user}`);
 			// listener for messages
