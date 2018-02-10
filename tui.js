@@ -52,27 +52,27 @@ box.screen = screen;
 socket.on('connect', () => {
 	box.addAnn('Connected to the server');
 
-	// Render the screen.
-	box.addPrompt('Enter channel to join');
-	input.read((ch) => {
-		channel = ch;
+	// join a channel
+	let userJoin = () => {
 		box.addPrompt('Enter user handle');
 		input.read((val) => {
 			user = val;
 			// join
 			socket.emit('/join', { channel: channel, user: user });
 		});
+	};
+	box.addPrompt('Enter channel to join');
+	input.read((ch) => {
+		channel = ch;
+		userJoin();
 	});
 
 	// set other listener
 	socket.on('/status', (msg) => {
 		if (msg.type === 'join failed') {
-			// console.log(`[ ${msg.data} ]`);
-			// TODO: retry
-			// getUserAndJoin();
-			box.add('failed');
+			box.addAnn(msg.data);
+			userJoin();
 			// TODO: err messages
-
 		} else if (msg.type === 'joined') {
 			// set status message
 			box.addAnn(`Joined channel ${channel} as ${user}`);
