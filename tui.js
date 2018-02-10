@@ -10,9 +10,8 @@ let input = require('./ui/input');
 // const URL = 'https://chattt.glitch.me';
 const URL = 'http://localhost:3000';
 
-// const socket = io(URL);
-// let channel, user;
-
+const socket = io(URL);
+let channel, user;
 
 
 // Append our box to the screen.
@@ -49,14 +48,51 @@ box.screen = screen;
 // 	// screen.render();
 // });
 
-// Render the screen.
-box.addPrompt('Enter channel to join');
-input.read((val) => {
-	box.addPrompt('Enter user handle');
-	input.read((val) => {
-		// join
-		box.add('Joined');
+// when socket connects
+socket.on('connect', () => {
+	box.add('{center}*** Connected to the server ***{/center}');
+
+	// Render the screen.
+	box.addPrompt('Enter channel to join');
+	input.read((ch) => {
+		channel = ch;
+		box.addPrompt('Enter user handle');
+		input.read((val) => {
+			user = val;
+			// join
+			socket.emit('/join', { channel: channel, user: user });
+		});
+	});
+
+	// set other listener
+	socket.on('/status', (msg) => {
+		if (msg.type === 'join failed') {
+			// console.log(`[ ${msg.data} ]`);
+			// getUserAndJoin();
+			box.add('failed');
+
+		} else if (msg.type === 'joined') {
+			// set status message
+			box.add(`*** Joined channel ${channel} as ${user} ***`);
+			// listener for messages
+			socket.on('/msg ' + channel, function (msg) {
+				if (msg.user === null) {
+					box.add(`[ ${msg.data} ]`);
+				} else {
+					box.add(`${msg.user}: ${msg.data}`);
+				}
+			});
+			// get user input messages
+			let getInput = () => {
+				input.read((val) => {
+					socket.emit('/msg ' + channel, { user: user, data: val });
+					getInput();
+				});
+			};
+			getInput();
+		}
 	});
 });
 
-// screen.render();
+// initial render
+screen.render();
