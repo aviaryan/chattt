@@ -60,6 +60,9 @@ let self = {
 	addAnn: (text) => {
 		self.add('{center}*** ' + text + ' ***{/center}');
 	},
+	addChatAnn: (text) => {
+		self.add(`{center}{${colors.yellow}-fg}${text}{/${colors.yellow}-fg}{/center}`);
+	},
 	addErr: (text) => {
 		self.add(`{${colors.red}-fg}${text}{/${colors.red}-fg}`);
 	},

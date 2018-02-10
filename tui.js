@@ -79,7 +79,7 @@ socket.on('connect', () => {
 			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
 					// public message TODO:
-					box.addAnn(msg.data);
+					box.addChatAnn(msg.data);
 				} else {
 					box.addChatMsg(msg);
 				}
