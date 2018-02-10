@@ -53,13 +53,14 @@ textBox.focus();
 textBox.readInput((err, value) => {
 	// console.log(value);
 	for (let i=0; i<100; i++){
-		box.addMessage(' Joining channel ' + value + " " + i);
+		box.batchAdd(' Joining channel ' + value + " " + i);
 		// box.setLine(i+1, ' Joining channel ' + value + " " + i);
 	}
+	box.finishAdding();
 	// box.setScrollPerc(100);
 	// box.focus();
 	// box.setContent(' Joining channel ' + value);
-	box.box.focus();
+	box.focus();
 	screen.render();
 });
 

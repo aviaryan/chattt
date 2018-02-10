@@ -33,14 +33,18 @@ let box = blessed.box({
 
 module.exports = {
 	box: box,
-	addMessage: (text) => {
-		lineCount++;
-		box.setLine(lineCount, text);
+	batchAdd: (text) => {
+		box.setLine(++lineCount, text);
+	},
+	finishAdding: () => {
 		// lower padding
-		for (let i=1; i<=3; i++){
-			box.setLine(lineCount+i, '');
+		for (let i = 1; i <= 3; i++) {
+			box.setLine(lineCount + i, '');
 		}
 		// scroll to the bottom
 		box.setScrollPerc(100);
+	},
+	focus: () => {
+		box.focus();
 	}
 }
