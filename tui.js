@@ -1,25 +1,13 @@
-const blessed = require('blessed');
+// const blessed = require('blessed');
 // const colors = require('./lib/solarized.js');
 
 let screen = require('./ui/screen');
 let box = require('./ui/box.js');
+let input = require('./ui/input');
 
 // Append our box to the screen.
 screen.append(box.box);
-
-var textBox = blessed.textbox({
-	bottom: 0,
-	height: 3,
-	style: {
-		bg: '#000000'
-	},
-	padding: {
-		top: 1,
-		left: 2
-	}
-});
-
-screen.append(textBox);
+screen.append(input.input);
 
 // If our box is clicked, change the content.
 // box.on('click', function (data) {
@@ -37,11 +25,10 @@ screen.append(textBox);
 
 // Focus our element.
 // box.focus();
-textBox.focus();
-textBox.readInput((err, value) => {
-	// console.log(value);
-	for (let i=0; i<100; i++){
-		box.batchAdd(' Joining channel ' + value + " " + i);
+input.focus();
+input.read((val) => {
+	for (let i = 0; i < 100; i++) {
+		box.batchAdd(' Joining channel ' + val + " " + i);
 		// box.setLine(i+1, ' Joining channel ' + value + " " + i);
 	}
 	box.finishAdding();
