@@ -14,6 +14,7 @@ let input = blessed.textbox({
 
 let self = {
 	input: input,
+	screen: null,
 	focus: () => {
 		input.focus();
 	},
@@ -27,10 +28,14 @@ let self = {
 				// read again, nothing was entered
 				self.read(cb);
 			} else {
-				input.clearValue();
+				self.clear();
 				cb(value);
 			}
 		});
+	},
+	clear: () => {
+		input.clearValue();
+		self.screen.render();
 	}
 };
 

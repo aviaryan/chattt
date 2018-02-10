@@ -18,6 +18,7 @@ let channel, user;
 screen.append(box.box);
 screen.append(input.input);
 box.screen = screen;
+input.screen = screen;
 
 // when socket connects
 socket.on('connect', () => {
@@ -76,4 +77,10 @@ screen.render();
 program.key('C-c', function (ch, key) {
 	program.clear();
 	process.exit(0);
+});
+
+// clear value when escape pressed
+// meant as a way to cancel message operation
+program.key('escape', (ch, key) => {
+	input.clear();
 });
