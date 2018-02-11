@@ -12,15 +12,9 @@ let box = blessed.box({
 	scrollbar: true,
 	content: `{center}{${colors.blue}-fg}****Welcome to {bold}chattt{/bold}!****{/${colors.blue}-fg}{/center}`,
 	tags: true,
-	border: {
-		type: 'line'
-	},
 	style: {
 		fg: colors.base1,
 		bg: colors.base03,
-		border: {
-			fg: '#f0f0f0'
-		},
 		scrollbar: {
 			bg: "grey",
 			fg: "bg"

@@ -6,6 +6,7 @@ let program = blessed.program();
 let screen = require('./ui/screen');
 let box = require('./ui/box.js');
 let input = require('./ui/input');
+let list = require('./ui/userlist');
 
 /** Server URL **/
 // const URL = 'https://chattt.glitch.me';
@@ -18,8 +19,10 @@ let channel, user;
 // Append elements to the screen.
 screen.append(box.box);
 screen.append(input.input);
+screen.append(list.list);
 box.screen = screen;
 input.screen = screen;
+list.screen = screen;
 
 let loading = blessed.loading({
 	tags: true
@@ -86,7 +89,7 @@ socket.on('connect', () => {
 
 	socket.on('/cb', (msg) => {
 		if (msg.type === 'users'){
-			box.add(`Users online: ${msg.data + ""}`);
+			list.addUsers(msg.data);
 		}
 	});
 });
