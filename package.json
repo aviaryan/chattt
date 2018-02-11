@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/aviaryan/chattt#readme",
   "dependencies": {
+    "blessed": "^0.1.81",
     "socket.io-client": "^2.0.4"
   }
 }
