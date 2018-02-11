@@ -28,6 +28,19 @@ let self = {
 	addUser: (user) => {
 		list.add(user);
 		self.screen.render();
+	},
+	removeUser: (user) => {
+		// https://github.com/chjj/blessed/blob/master/lib/widgets/list.js#L234
+		let i = 0;
+		for (; i < list.items.length; i++){
+			if (list.items[i].content === user){
+				break;
+			}
+		}
+		if (i < list.items.length){
+			list.removeItem(list.items[i]);
+		}
+		self.screen.render();
 	}
 };
 

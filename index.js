@@ -79,6 +79,8 @@ socket.on('connect', () => {
 			socket.on('/meta ' + channel, (msg) => {
 				if (msg.type === 'join'){
 					list.addUser(msg.data);
+				} else if (msg.type === 'left'){
+					list.removeUser(msg.data);
 				}
 			});
 			// get user input messages
