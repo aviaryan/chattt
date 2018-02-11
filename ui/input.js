@@ -1,10 +1,12 @@
 const blessed = require('blessed');
+const colors = require('./../lib/solarized.js');
 
 let input = blessed.textbox({
 	bottom: 0,
 	height: 3,
 	style: {
-		bg: '#000000'
+		bg: colors.base02,
+		fg: colors.base1
 	},
 	padding: {
 		top: 1,

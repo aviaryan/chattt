@@ -5,14 +5,16 @@ let list = blessed.list({
 	right: 0,
 	width: 15,
 	top: 0,
-	padding: 0,
+	padding: {
+		top: 0, bottom: 0, left: 1, right: 0
+	},
 	tags: true,
 	scrollable: true,
 	scrollbar: true,
-	items: ['', '{bold}USERS{/bold}'],  // workaround
+	items: ['', `{bold}{${colors.orange}-fg}USERS{${colors.orange}-fg}{/bold}`],  // workaround
 	style: {
-		fg: colors.base1,
-		bg: colors.base03,
+		fg: colors.base01,
+		bg: colors.base3,
 	}
 });
 
