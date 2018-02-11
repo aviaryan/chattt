@@ -60,8 +60,6 @@ socket.on('connect', () => {
 			screen.render();
 			// delete old lines
 			box.deleteAllLines();
-			// set status message
-			box.addAnn(`Joined channel ${channel} as ${user}`);
 			// get current users in channel
 			socket.emit('/users', {channel: channel});
 			// listener for messages
