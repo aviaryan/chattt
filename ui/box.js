@@ -72,6 +72,10 @@ let self = {
 			box.deleteLine(i);
 		}
 		lineCount = 0;
+	},
+	setJoinMessage: (ch, url) => {
+		box.content = `{center}#${ch} at {${colors.blue}-fg}${url}{/${colors.blue}-fg}{/center}`;
+		self.screen.render();
 	}
 };
 

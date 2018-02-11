@@ -62,6 +62,8 @@ socket.on('connect', () => {
 			box.deleteAllLines();
 			// get current users in channel
 			socket.emit('/users', {channel: channel});
+			// set title
+			box.setJoinMessage(channel, URL);
 			// listener for messages
 			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
