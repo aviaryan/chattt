@@ -22,6 +22,10 @@ let self = {
 	addUsers: (arr) => {
 		arr.map((it) => list.add(it));
 		self.screen.render();
+	},
+	addUser: (user) => {
+		list.add(user);
+		self.screen.render();
 	}
 };
 

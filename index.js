@@ -70,10 +70,15 @@ socket.on('connect', () => {
 			// listener for messages
 			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
-					// public message TODO:
 					box.addChatAnn(msg.data);
 				} else {
 					box.addChatMsg(msg);
+				}
+			});
+			// listener for meta messages
+			socket.on('/meta ' + channel, (msg) => {
+				if (msg.type === 'join'){
+					list.addUser(msg.data);
 				}
 			});
 			// get user input messages
