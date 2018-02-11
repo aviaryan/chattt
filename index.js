@@ -62,6 +62,8 @@ socket.on('connect', () => {
 			box.deleteAllLines();
 			// set status message
 			box.addAnn(`Joined channel ${channel} as ${user}`);
+			// get current users in channel
+			socket.emit('/users', {channel: channel});
 			// listener for messages
 			socket.on('/msg ' + channel, function (msg) {
 				if (msg.user === null) {
@@ -79,6 +81,12 @@ socket.on('connect', () => {
 				});
 			};
 			getInput();
+		}
+	});
+
+	socket.on('/cb', (msg) => {
+		if (msg.type === 'users'){
+			box.add(`Users online: ${msg.data + ""}`);
 		}
 	});
 });

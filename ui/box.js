@@ -21,9 +21,6 @@ let box = blessed.box({
 		border: {
 			fg: '#f0f0f0'
 		},
-		hover: {
-			// bg: 'green'
-		},
 		scrollbar: {
 			bg: "grey",
 			fg: "bg"
