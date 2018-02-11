@@ -14,11 +14,7 @@ let box = blessed.box({
 	tags: true,
 	style: {
 		fg: colors.base1,
-		bg: colors.base03,
-		scrollbar: {
-			bg: "grey",
-			fg: "bg"
-		}
+		bg: colors.base03
 	}
 });
 

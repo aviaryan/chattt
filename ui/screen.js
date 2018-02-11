@@ -8,8 +8,8 @@ let screen = blessed.screen({
 });
 
 // Quit on Ctrl-C, Esc or Q
-screen.key(['escape', 'q', 'C-c'], function (ch, key) {
-	return process.exit(0);
-});
+// screen.key(['escape', 'q', 'C-c'], function (ch, key) {
+// 	return process.exit(0);
+// });
 
 module.exports = screen;
