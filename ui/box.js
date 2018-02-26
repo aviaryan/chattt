@@ -68,7 +68,7 @@ let self = {
 		lineCount = 0;
 	},
 	setJoinMessage: (ch, url) => {
-		box.content = `{center}#${ch} at {${colors.blue}-fg}${url}{/${colors.blue}-fg}{/center}`;
+		box.content = `{center}#${ch} at {${colors.blue}-fg}${url}{/${colors.blue}-fg} (ctrl-c to exit){/center}`;
 		self.screen.render();
 	}
 };
