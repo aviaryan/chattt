@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const io = require('socket.io-client');
 const colors = require('./lib/solarized');
 const blessed = require('blessed');
