@@ -27,7 +27,7 @@ list.screen = screen;
 let loading = blessed.loading({
 	tags: true
 });
-loading.load('{center}Chattt is connecting to the server{/center}');
+loading.load(`{center}Chattt is connecting to the server ${URL}{/center}`);
 screen.append(loading);
 
 // when socket connects
