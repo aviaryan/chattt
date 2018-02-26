@@ -41,6 +41,10 @@ let self = {
 		self.batchAdd(text);
 		self.finishAdding();
 	},
+	addInline: (text) => {
+		box.setLine(lineCount, box.getLine(lineCount) + text);
+		self.finishAdding();
+	},
 	addPrompt: (text) => {
 		self.add('>> ' + text);
 	},

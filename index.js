@@ -42,6 +42,7 @@ socket.on('connect', () => {
 		box.addPrompt('Enter user handle');
 		input.read((val) => {
 			user = val;
+			box.addInline(` (${user})`);
 			// join
 			socket.emit('/join', { channel: channel, user: user });
 		});
@@ -49,6 +50,7 @@ socket.on('connect', () => {
 	box.addPrompt('Enter channel to join');
 	input.read((ch) => {
 		channel = ch;
+		box.addInline(` (${channel})`);
 		userJoin();
 	});
 
