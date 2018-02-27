@@ -1,16 +1,20 @@
-<h1 align="left">
-	Chattt
-</h1> 
-
 <p align="center">
  <img src="https://user-images.githubusercontent.com/4047597/36716307-e6c24506-1bbf-11e8-8bfe-cc151874f332.png" width="128px">
 </p>
 
-Chat without leaving your terminal.
+<h1 align="center">
+	❯❯❯ Chattt
+</h1>
 
-[![npm](https://img.shields.io/npm/v/chattt.svg)](https://www.npmjs.com/package/chattt)
-[![npm](https://img.shields.io/npm/dm/chattt.svg)](https://www.npmjs.com/package/chattt)
-[![npm](https://img.shields.io/npm/l/chattt.svg)]()
+<p align="center">
+Chat without leaving your terminal.
+</p>
+
+<p align="center">
+<a href="https://www.npmjs.com/package/chattt"><img src="https://img.shields.io/npm/v/chattt.svg"></a>
+<a href="https://www.npmjs.com/package/chattt"><img src="https://img.shields.io/npm/dm/chattt.svg"></a>
+<a href="https://www.npmjs.com/package/chattt"><img src="https://img.shields.io/npm/l/chattt.svg"></a>
+</p>
 
 
 ### Using
