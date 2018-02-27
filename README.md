@@ -3,6 +3,11 @@
 Chattt is a CLI-based chat network.
 
 
+[![npm](https://img.shields.io/npm/v/chattt.svg)](https://www.npmjs.com/package/chattt)
+[![npm](https://img.shields.io/npm/dm/chattt.svg)](https://www.npmjs.com/package/chattt)
+[![npm](https://img.shields.io/npm/l/chattt.svg)]()
+
+
 ### Using
 
 ```sh
