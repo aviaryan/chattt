@@ -1,6 +1,6 @@
 # Chattt
 
-Chattt is a CLI-based chat network.
+Chat without leaving your terminal.
 
 
 [![npm](https://img.shields.io/npm/v/chattt.svg)](https://www.npmjs.com/package/chattt)
