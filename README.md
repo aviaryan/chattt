@@ -26,6 +26,7 @@ The working of this application is IRC inspired so you will see messages when us
 * [socket.io](https://socket.io)
 * [blessed](https://github.com/chjj/blessed) - For making the CLI application.
 * [Express.js](https://expressjs.com/) - For the [backend](#backend).
+* [Glitch](https://glitch.com) - For hosting the backend.
 
 
 ### Backend
