@@ -17,7 +17,7 @@ Chat without leaving your terminal.
 </p>
 
 <p align="center">
- <img src="https://user-images.githubusercontent.com/4047597/36723701-06958a52-1bd7-11e8-820b-f3f801679f98.gif">
+ <img src="https://user-images.githubusercontent.com/4047597/36725003-e922a082-1bda-11e8-9b08-2537a8a05529.gif">
 </p>
 
 
