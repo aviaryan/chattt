@@ -17,7 +17,7 @@ Chat without leaving your terminal.
 </p>
 
 
-### Using
+## Using
 
 ```sh
 > npm install -g chattt
@@ -26,7 +26,7 @@ Chat without leaving your terminal.
 ```
 
 
-### Basics
+## Basics
 
 When `chattt` opens, you are asked the channel name that you want to join. Enter the name, and then enter your desired handle as well.
 
@@ -35,7 +35,7 @@ If everything goes well, you should be going the channel.
 The working of this application is IRC inspired so you will see messages when users join or leave a channel.
 
 
-### Technologies Used
+## Technologies Used
 
 * [socket.io](https://socket.io)
 * [blessed](https://github.com/chjj/blessed) - For making the CLI application.
@@ -43,7 +43,7 @@ The working of this application is IRC inspired so you will see messages when us
 * [Glitch](https://glitch.com) - For hosting the backend.
 
 
-### Backend
+## Backend
 
 The backend of this application is hosted for free on Glitch. 
 Do check it out as it is pretty cool. 😄
@@ -51,6 +51,6 @@ Do check it out as it is pretty cool. 😄
 The source code for the same is at [aviaryan/chattt-backend](https://github.com/aviaryan/chattt-backend).
 
 
-### Credits
+## Credits
 
 Icon made by [Freepik](https://www.flaticon.com/authors/freepik) from www.flaticon.com.
