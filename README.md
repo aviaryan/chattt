@@ -28,11 +28,11 @@ Chat without leaving your terminal.
 
 ## Basics
 
-When `chattt` opens, you are asked the channel name that you want to join. Enter the name, and then enter your desired handle as well.
+When `chattt` opens, you are asked the channel name that you want to join. Enter the channel name, and then enter your desired user handle.
 
-If everything goes well, you should be going the channel.
+If everything goes well, you should be joining the channel.
 
-The working of this application is IRC inspired so you will see messages when users join or leave a channel.
+The working of this application is inspired by IRC so you will see messages when users join or leave a channel.
 
 
 ## Technologies Used
