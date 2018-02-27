@@ -1,10 +1,10 @@
-<h1 align="left">
-	Chattt
-</h1> 
-
 <p align="center">
  <img src="https://user-images.githubusercontent.com/4047597/36716307-e6c24506-1bbf-11e8-8bfe-cc151874f332.png" width="128px">
 </p>
+
+<h1 align="center">
+	❯❯❯ Chattt
+</h1>
 
 Chat without leaving your terminal.
 
