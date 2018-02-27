@@ -16,6 +16,10 @@ Chat without leaving your terminal.
 <a href="https://www.npmjs.com/package/chattt"><img src="https://img.shields.io/npm/l/chattt.svg"></a>
 </p>
 
+<p align="center">
+ <img src="https://user-images.githubusercontent.com/4047597/36723701-06958a52-1bd7-11e8-820b-f3f801679f98.gif">
+</p>
+
 
 ## Using
 
