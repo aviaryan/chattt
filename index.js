@@ -49,6 +49,7 @@ socket.on('connect', () => {
 			socket.emit('/join', { channel: channel, user: user });
 		});
 	};
+	input.set('test'); // default channel
 	box.addPrompt('Enter channel to join');
 	input.read((ch) => {
 		channel = ch;

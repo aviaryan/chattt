@@ -38,6 +38,10 @@ let self = {
 	clear: () => {
 		input.clearValue();
 		self.screen.render();
+	},
+	set: (val) => {
+		input.setValue(val);
+		self.screen.render();
 	}
 };
 
