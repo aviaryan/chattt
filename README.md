@@ -30,6 +30,13 @@ Chat without leaving your terminal.
 ```
 
 
+## Why build this?
+
+Well, I would say, the strongest reason why I build this is because I wanted to play with [socket.io](https://socket.io/) and a [cool terminal interface library](https://github.com/chjj/blessed).
+A chat system was one of the ways to realize this and hence I went ahead with it.
+It has no advantages over IRC or some other chat system that you are used to, but it might come handy for quick chatting (from terminal) with zero entry-level knowledge required (no need to memorize IRC commands for example). 🍰✨
+
+
 ## Basics
 
 When `chattt` opens, you are asked the channel name that you want to join. Enter the channel name, and then enter your desired user handle.
