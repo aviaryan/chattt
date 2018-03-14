@@ -21,10 +21,10 @@ let channel, user;
 // Append elements to the screen.
 screen.append(box.box);
 screen.append(input.input);
-screen.append(list.list);
+// screen.append(list.list);
 box.screen = screen;
 input.screen = screen;
-list.screen = screen;
+// list.screen = screen;
 
 let loading = blessed.loading({
 	tags: true
@@ -46,6 +46,9 @@ socket.on('connect', () => {
 			user = val;
 			box.addInline(` (${user})`);
 			// join
+			screen.append(list.list);
+			list.screen = screen;
+			screen.render();
 			socket.emit('/join', { channel: channel, user: user });
 		});
 	};
