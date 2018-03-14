@@ -21,10 +21,8 @@ let channel, user;
 // Append elements to the screen.
 screen.append(box.box);
 screen.append(input.input);
-// screen.append(list.list);
 box.screen = screen;
 input.screen = screen;
-// list.screen = screen;
 
 let loading = blessed.loading({
 	tags: true
