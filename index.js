@@ -45,8 +45,9 @@ socket.on('connect', () => {
 		input.read((val) => {
 			user = val;
 			box.addInline(` (${user})`);
+			let time = String(new Date().getHours()) + ':' + String(new Date().getMinutes());
 			// join
-			socket.emit('/join', { channel: channel, user: user });
+			socket.emit('/join', { channel: channel, user: user, time: time  });
 		});
 	};
 	input.set('test'); // default channel
