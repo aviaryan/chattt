@@ -46,7 +46,7 @@ socket.on('connect', () => {
 			user = val;
 			box.addInline(` (${user})`);
 			// join
-			socket.emit('/join', { channel: channel, user: user });
+			socket.emit('/join', { channel: channel, user: user, time: Date() });
 		});
 	};
 	input.set('test'); // default channel
