@@ -16,7 +16,7 @@ const URL = 'http://localhost:3000';
 
 // server connection
 const socket = io(URL);
-let channel, user;
+let channel, user,pwd;
 
 // Append elements to the screen.
 screen.append(box.box);
@@ -40,28 +40,67 @@ socket.on('connect', () => {
 	loading.stop();
 
 	// join a channel
-	let userJoin = () => {
-		box.addPrompt('Enter user handle');
-		input.read((val) => {
-			user = val;
-			box.addInline(` (${user})`);
-			// join
-			socket.emit('/join', { channel: channel, user: user });
-		});
-	};
+
 	input.set('test'); // default channel
 	box.addPrompt('Enter channel to join');
-	input.read((ch) => {
-		channel = ch;
+	input.read((val) => {
+		channel = val;
+	    
 		box.addInline(` (${channel})`);
-		userJoin();
+	    	socket.emit('/check',{chnl:channel});
 	});
+	socket.on('/verifyResult',(data)=>{
+        if(data.matched){
+        box.addErr(` ${channel} is already active on Chattt verify and Get Logged In !!!`);	
+		box.addPrompt('Verification Pass : ');
+		input.read((val)=>{
+			pwd = val;
+            socket.emit('/verify', { channel: channel, user: user,pass:pwd });
+			
+	});
+	    
+	}
+			else{
+		    box.addPrompt('Enter user handle');
+	  	    input.read((val) => {
+				user = val;
+				box.addInline(` (${user})`);
+                box.addPrompt('Set Verification:');
+                input.read((val) => {
+							pwd = val;
+				socket.emit('/join', { channel: channel, user: user,pass:pwd });
+		});
+
+		});	
+			}
+			
+	});
+	socket.on('/resp',(data)=>{
+		    if(data.status)
+		    {
+		     	box.addPrompt('Enter user handle');
+	  	        input.read((val) => {
+				user = val;
+				box.addInline(` (${user})`);
+                //join
+                socket.emit('/join', { channel: channel, user: user,pass:pwd })})}
+			else{
+		        box.addErr('Invailid Pass');
+
+			}
+	});
+	
 
 	// set other listener
 	socket.on('/status', (msg) => {
 		if (msg.type === 'join failed') {
 			box.addErr(msg.data);
-			userJoin();
+			box.addPrompt('Enter user handle');
+	  	    input.read((val) => {
+			user = val;
+			box.addInline(` (${user})`);
+			socket.emit('/join', { channel: channel, user: user,pass:pwd })});
+			//userJoin();
 		} else if (msg.type === 'joined') {
 			// update screen title
 			screen.title = `${user} on #${channel} - Chattt`;

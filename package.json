@@ -15,7 +15,9 @@
     "url": "git+https://github.com/aviaryan/chattt.git"
   },
   "keywords": [
-    "chat", "socket", "socketio"
+    "chat",
+    "socket",
+    "socketio"
   ],
   "author": "Avi Aryan",
   "license": "MIT",
