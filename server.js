@@ -24,22 +24,27 @@ io.on('connection', function (socket) {
     }
   });
 
-  // join channel
+  // checking if channel is already active
   socket.on('/check',(data)=>{
     if(channels.hasOwnProperty(data.chnl)){
+      // yes it is
       socket.emit('/verifyResult',{matched:true});
     }
     else{
+      // it's not you can go on
       socket.emit('/verifyResult',{matched:false});
          
     }
     
   });
+  // verifying Password
   socket.on('/verify',(data)=>{
     if(data.pass===channels[data.channel]['pass'])
+      // Welcome you are verified
       socket.emit('/resp',{status:true});
     else{
-            socket.emit('/resp',{status:false});
+      // Sorry can't get you verified 
+      socket.emit('/resp',{status:false});
 
     }
   })
