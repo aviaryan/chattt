@@ -45,29 +45,34 @@ socket.on('connect', () => {
 	box.addPrompt('Enter channel to join');
 	input.read((val) => {
 		channel = val;
-	    
-		box.addInline(` (${channel})`);
+	        box.addInline(` (${channel})`);
 	    	socket.emit('/check',{chnl:channel});
 	});
+	// checking if channel is already active
 	socket.on('/verifyResult',(data)=>{
         if(data.matched){
+		// already active
         box.addErr(` ${channel} is already active on Chattt verify and Get Logged In !!!`);	
+		// verify yourself
 		box.addPrompt('Verification Pass : ');
 		input.read((val)=>{
 			pwd = val;
+		// Asking Server to verify password	
             socket.emit('/verify', { channel: channel, user: user,pass:pwd });
 			
 	});
 	    
 	}
-			else{
-		    box.addPrompt('Enter user handle');
-	  	    input.read((val) => {
-				user = val;
-				box.addInline(` (${user})`);
+	// New Channel to Chattt	
+	else{
+             box.addPrompt('Enter user handle');
+	     input.read((val) => {
+		user = val;
+		box.addInline(` (${user})`);
+		 // Set Verification    
                 box.addPrompt('Set Verification:');
                 input.read((val) => {
-							pwd = val;
+				pwd = val;
 				socket.emit('/join', { channel: channel, user: user,pass:pwd });
 		});
 
@@ -75,6 +80,7 @@ socket.on('connect', () => {
 			}
 			
 	});
+	// Password Verification Response
 	socket.on('/resp',(data)=>{
 		    if(data.status)
 		    {
