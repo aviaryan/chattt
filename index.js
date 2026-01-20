@@ -11,7 +11,7 @@ let input = require('./ui/input');
 let list = require('./ui/userlist');
 
 /** Server URL **/
-// const URL = 'https://chattt.glitch.me';
+// const URL = 'https://chattt-backend.onrender.com';
 const URL = 'http://localhost:3000';
 
 // server connection
